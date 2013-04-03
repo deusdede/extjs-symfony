@@ -1,3 +1,13 @@
+dsjEstoqueBundle:
+    resource: "@dsjEstoqueBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+dsjContatoBundle:
+    resource: "@dsjContatoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
