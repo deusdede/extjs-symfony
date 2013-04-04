@@ -84,12 +84,27 @@
 
 				//console.log(end.get('logradouro') + ' ' + end.get('numero'));
 				
-				console.log(Ext.JSON.encode(pessoa.data));
-				console.log(Ext.JSON.encode(pessoa.getEndereco().data));
+				console.log(pessoa.data);
+				console.log(pessoa.getEndereco().data);
 				telefones.each(function (tel){
-					console.log(Ext.JSON.encode(tel.data));
+					console.log(tel.data);
 				});
 
+				var dadosPessoa = new Array();
+				dadosPessoa["pessoa"]=pessoa.data;
+				dadosPessoa["endereco"]=pessoa.getEndereco().data;
+				var dadosTelefone = new Array();
+				seq=0;
+				telefones.each(function (tel){
+				    seq++;
+					dadosTelefone["seq"+seq]=tel.data;
+				});
+				dadosPessoa["telefone"]=dadosTelefone;
+				
+				dadosPessoaJson = JSON.stringify(dadosPessoa);
+				
+				console.log(dadosPessoa);
+				
 				//var arrCars = new Array("Toyota", "Mercedes", "BMW");           
 				//var jsonStr = JSON.stringify(arrCars);
 				//alert(jsonStr);
@@ -99,11 +114,11 @@
 				
 				//Ext.Ajax.request({
 				//	url: 'php/testaJson.php',  
-                //    method:'put',
+                //    method:'post',
 					//success : function() {
 					//	window.location = './account/login'; 
 					//},
-				//	params: { json: jsonStr }  
+				//	params: { pessoa: dadosPessoaJson }  
 				//});				
 				
 			}

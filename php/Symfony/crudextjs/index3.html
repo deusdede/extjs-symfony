@@ -1,0 +1,104 @@
+<html>
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	
+    <!-- Ext JS Files -->
+    <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="extjs/ext-all-debug.js"></script>
+
+</head>
+
+<body></body>
+
+	<script type="text/javascript">
+
+	Ext.define('Produto',{
+		extend: 'Ext.data.Model',
+
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'nome', type: 'string'},
+			{name: 'preco', type: 'double'},
+			{name: 'descricao', type: 'string'},
+		],
+
+		hasOne: {model: 'Categoria'}
+	});
+
+	Ext.define('Categoria',{
+		extend: 'Ext.data.Model',
+
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'nome', type: 'string'},
+		]
+	});
+	
+	Ext.define('ProdutosStore',{
+		extend: 'Ext.data.Store',
+		model: 'Produto',
+		proxy: {
+			type: 'ajax',
+			type: 'rest',
+			url: '/web/app_dev.php/produto/',
+
+			reader: {
+				type: 'json', //json ou xml
+				root: 'produtos'
+			},
+
+			writer: {
+				type: 'json', //json ou xml
+				root: 'produtos',
+				writeAllFields: true,
+				encode: true,
+				allowSingle: true
+			}
+		},
+		autoLoad: true,
+
+		autoSync: true
+	})
+	
+	Ext.onReady(function(){
+
+
+		var store = Ext.create('ProdutosStore');
+
+		//console.log(store.data);
+
+		store.on('load', function(s){
+
+			//console.log(s.data);
+
+			/*var Produto = Ext.create('Produto',{
+				nome: 'Loiane2',
+				email: 'me@loiane.com',
+				id: 14
+			});*/
+
+			//CREATE
+			//s.add(Produto); //s.add({nome: 'Loiane2', email: 'me@loiane.com'});
+			//s.insert(0,Produto); //insere Produto na primeira posição da store
+
+			//UPDATE
+			var ProdutoAtualizado = s.getAt(0); 
+			ProdutoAtualizado.set('nome', 'TV LED 40 PHILIPS');
+			console.log(ProdutoAtualizado);
+
+			//DELETE
+			//s.remove(modelo);
+			//s.removeAt(index);
+			//s.removeAll(silent); //remove tudo //silent == true ou false
+			//s.remove(s.getAt(2));
+
+			//s.sync();
+
+
+		});
+		
+    });
+	</script>
+
+</html>
