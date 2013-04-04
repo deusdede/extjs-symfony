@@ -66,7 +66,7 @@
 
 			success: function (pessoa){
 
-				console.log(JSON.stringify(pessoa.getEndereco()));
+				//console.log(JSON.stringify(pessoa.getEndereco()));
 				//console.log('Nome da pessoa é ' + pessoa.get('nome'));
 
 				var telefones = pessoa.telefones();
@@ -83,6 +83,29 @@
 				var end = pessoa.getEndereco();
 
 				//console.log(end.get('logradouro') + ' ' + end.get('numero'));
+				
+				console.log(Ext.JSON.encode(pessoa.data));
+				console.log(Ext.JSON.encode(pessoa.getEndereco().data));
+				telefones.each(function (tel){
+					console.log(Ext.JSON.encode(tel.data));
+				});
+
+				//var arrCars = new Array("Toyota", "Mercedes", "BMW");           
+				//var jsonStr = JSON.stringify(arrCars);
+				//alert(jsonStr);
+		
+				//var jsonStr = Ext.JSON.encode(pessoa);
+				//alert(jsonStr);
+				
+				//Ext.Ajax.request({
+				//	url: 'php/testaJson.php',  
+                //    method:'put',
+					//success : function() {
+					//	window.location = './account/login'; 
+					//},
+				//	params: { json: jsonStr }  
+				//});				
+				
 			}
 		});
 
